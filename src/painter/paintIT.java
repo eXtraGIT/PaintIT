@@ -4,24 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class paintIT
-{
-    public static void main(String[] args)
-    {
-        PaintWindow frame = new PaintWindow();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setVisible(true);
-    }
-
-}
-
 class PaintWindow extends JFrame
 {
+
     public PaintWindow()
     {
-        setTitle("PaintIt");
-        setSize(450, 450);
+        setTitle("Рисовалка");
+        setSize(600, 600);
 
         panel = new JPanel();
         drawPad = new PadDraw();
@@ -33,14 +22,16 @@ class PaintWindow extends JFrame
         content.setLayout(new BorderLayout());
 
         //установить панель слева, а место для рисования по центру
-        content.add(panel, BorderLayout.WEST);
+        content.add(panel, BorderLayout.EAST);
         content.add(drawPad, BorderLayout.CENTER);
 
-//add the color buttons:
+        //добавить кнопки с цветами
         makeColorButton(Color.BLUE);
         makeColorButton(Color.MAGENTA);
         makeColorButton(Color.RED);
         makeColorButton(Color.GREEN);
+        makeColorButton(Color.CYAN);
+        makeColorButton(Color.PINK);
         makeColorButton(Color.BLACK);
 
         //создать кнопку для очистки
@@ -54,7 +45,6 @@ class PaintWindow extends JFrame
         });
         panel.add(clearButton);
     }
-
     /*
     * кнопка для замены цвета
     */
@@ -74,18 +64,18 @@ class PaintWindow extends JFrame
     }
 
     private JPanel panel;
+
     private PadDraw drawPad;
 }
-
 class PadDraw extends JComponent
 {
+
     //сюда будем "рисовать"
     Image image;
     //Это чем будем рисовать
     Graphics2D graphics2D;
     //Это будут координаты мышки
     int currentX, currentY, oldX, oldY;
-
     public PadDraw()
     {
         setDoubleBuffered(false);
@@ -154,4 +144,20 @@ class PadDraw extends JComponent
         graphics2D.setPaint(theColor);
         repaint();
     }
+
+}
+
+
+
+
+public class paintIT
+{
+    public static void main(String[] args)
+    {
+        PaintWindow frame = new PaintWindow();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
+
 }
